@@ -1,9 +1,22 @@
 #include <iostream>
+class Auto;
+class Person
+{
+public:
+    Person(std::string n)
+    {
+        name = n;
+    }
+    void drive(Auto &a);
+    void setPrice(Auto &a, int price);
+private:
+    std::string name;
+};
 
 class Auto {
-    friend void drive(Auto &);
+    friend void Person::drive(Auto &);
 
-    friend void setPrice(Auto &, int price);
+    friend void Person::setPrice(Auto &, int price);
 
 public:
     Auto(std::string autoName, int autoPrice) {
@@ -20,20 +33,21 @@ private:
     int price;
 };
 
-void drive(Auto &a) {
+void Person::drive(Auto &a) {
     std::cout << a.name << " is driven" << std::endl;
 }
 
-void setPrice(Auto &a, int price) {
+void Person::setPrice(Auto &a, int price) {
     if (price > 0)
         a.price = price;
 }
 
 int main() {
     Auto tesla("Tesla", 50000);
-    drive(tesla);
-    std::cout << tesla.getName() << " : " << tesla.getPrice() << std::endl;
-    setPrice(tesla, 80000);
-    std::cout << tesla.getName() << " : " << tesla.getPrice() << std::endl;
+    Person tom("Tom");
+    tom.drive(tesla);
+    tom.setPrice(tesla, 80000);
+    std::cout << tesla.getName()<< " : "<< tesla.getPrice() << std::endl;
+
     return 0;
 }
