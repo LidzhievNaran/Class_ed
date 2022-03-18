@@ -1,28 +1,26 @@
 #include <iostream>
 class Person{
 public:
-    std::string name;
+    const std::string name;
+    int &ageRef;
     int age;
-    Person(std::string n, int a)//конструктор класса;
+    Person(std::string n, int a) : name(n), age(a), ageRef(age)//когда код инструкции из тела конструктора начнут выполняться, константы и ссылки уже должны быть инициализированы
     {
-        name = n; age = a;
-        std::cout << "First constructor" << std::endl;
     }
-    Person(std::string n): Person(n, 19)
+    Person(std::string n) : name(n), age(18), ageRef(age)
     {
-        std::cout << "Second constructor"<< std::endl;
     }
-    Person(): Person("Alexa")
+    Person():name("Alexa"), age(19), ageRef(age)
     {
-        std::cout << "Third Constructor" << std::endl;
     }
-    //вызываем из одного конструктора другой
     void move(){
-        std::cout << name << " is moving"<< std::endl;
+        std::cout << name << "is moving"<< std::endl;
     }
 };
 int main() {
+    Person tom("Tom", 22);
+    std::cout << "Name: "<< tom.name<< "\tAge: "<< tom.age<< "\t AgeRef: "<< tom.ageRef << std::endl;
     Person Alexa = Person();
-    std::cout << "Name: "<< Alexa.name << "\tAge: " << Alexa.age << std::endl;
+    std::cout << "Name: "<< Alexa.name<< "\tAge: "<< Alexa.age<< "\t AgeRef: "<< Alexa.ageRef << std::endl;
     return 0;
 }
