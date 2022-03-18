@@ -1,39 +1,39 @@
 #include <iostream>
 
-class Person {
+class Auto {
+    friend void drive(Auto &);
+
+    friend void setPrice(Auto &, int price);
+
 public:
-    Person(std::string n, int a);
-    void move();
-    void setAge(int a);
-    std::string getName();
-    int getAge();
+    Auto(std::string autoName, int autoPrice) {
+        name = autoName;
+        price = autoPrice;
+    }
+
+    std::string getName() { return name; }
+
+    int getPrice() { return price; }
+
 private:
     std::string name;
-    int age;
+    int price;
 };
 
-Person::Person(std::string n, int a) {
-    name = n;
-    age = a;
+void drive(Auto &a) {
+    std::cout << a.name << " is driven" << std::endl;
 }
-void Person::setAge(int a) {
-    if (a> 0 && a < 100) age = a;
+
+void setPrice(Auto &a, int price) {
+    if (price > 0)
+        a.price = price;
 }
-void Person::move() {
-    std::cout << name << " is moving" << std::endl;
-}
-std::string Person::getName() {
-    return name;
-}
-int Person::getAge(){
-    return age;
-}
+
 int main() {
-    Person tom("Tom", 22);
-    std::cout << "Name: " << tom.getName() << "\tAge: " << tom.getAge() << std::endl;
-    tom.setAge(31);
-    std::cout << "Name: " << tom.getName() << "\tAge: " << tom.getAge() << std::endl;
-    tom.setAge(291);
-    std::cout << "Name: " << tom.getName() << "\tAge: " << tom.getAge() << std::endl;
+    Auto tesla("Tesla", 50000);
+    drive(tesla);
+    std::cout << tesla.getName() << " : " << tesla.getPrice() << std::endl;
+    setPrice(tesla, 80000);
+    std::cout << tesla.getName() << " : " << tesla.getPrice() << std::endl;
     return 0;
 }
