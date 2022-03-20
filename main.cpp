@@ -1,24 +1,25 @@
 #include <iostream>
 #include <string>
 
-class Account{
+class Person
+{
 public:
-    const static int rate = 8;
-    Account(double sum)
+    Person(std::string n)
     {
-        this->sum = sum;
+        name = n;
     }
-    double getIncome()
+    ~Person()
     {
-        return sum + sum * rate / 100;
+        std::cout<< "Destructor called for Person "<< name << std::endl;
     }
 private:
-    double sum;
+    std::string name;
 };
+
 int main() {
-    Account account1(20000);
-    Account account2(50000);
-    std::cout << "Rate: "<< account1.rate << "\tIncome: " << account1.getIncome()<< std::endl;
-    std::cout << "Rate: "<< account2.rate << "\tIncome: " << account2.getIncome()<< std::endl;
+ Person tom("Tom");
+ Person *sam = new Person("Sam");
+ delete sam;
+ std::cout << "End of Main" << std::endl;
     return 0;
 }
