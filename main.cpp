@@ -20,14 +20,28 @@ public:
     }
     int seconds;
 };
+bool operator == (Counter c1, Counter c2)
+{
+    return c1.seconds == c2.seconds;
+}
+bool operator != (Counter c1, Counter c2)
+{
+    return c1.seconds != c2.seconds;
+}
+bool operator > (Counter c1, Counter c2){
+    return c1.seconds > c2.seconds;
+}
+bool operator < (Counter c1, Counter c2){
+    return c1.seconds < c2.seconds;
+}
 
 int main() {
     Counter c1(20);
     Counter c2(10);
-    Counter fuck(90);
-    Counter c3 = c1 + c2;
-    c3.display();
-    int seconds = c1 +25;
-    std::cout << seconds << std::endl;
+    bool b1 = c1 == c2;
+    bool b2 = c1 > c2;
+    std::cout << b1 << std::endl;
+    std::cout << b2 << std::endl;
+
     return 0;
 }
