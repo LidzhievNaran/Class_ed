@@ -1,56 +1,35 @@
 #include <iostream>
 #include <string>
 
-class Auto;
-
-class Person
-{
+class Account{
 public:
-    Person(std::string n)
+    Account(double sum)
     {
-        name = n;
+        this->sum = sum;
     }
-    void drive(Auto &a);
-    void setPrice(Auto &a, int price);
-
-private:
-    std::string name;
-};
-
-class Auto
-{
-    friend class Person;
-public:
-    Auto(std::string autoName, int autoPrice)
+    static int getRate()
     {
-        name = autoName;
-        price = autoPrice;
+        return rate;
     }
-    std::string getName() { return name; }
-    int getPrice() { return price; }
-
+    static void setRate(int r)
+    {
+        rate = r;
+    }
+    double getIncome()
+    {
+        return sum + sum * rate / 100;
+    }
 private:
-    std::string name;   // название автомобиля
-    int price;  // цена автомобиля
+    double sum;
+    static int rate;
 };
-
-void Person::drive(Auto &a)
-{
-    std::cout << name << " drives " << a.name << std::endl;
-}
-void Person::setPrice(Auto &a, int price)
-{
-    if (price > 0)
-        a.price = price;
-}
-
-int main()
-{
-    Auto tesla("Tesla", 5000);
-    Person tom("Tom");
-    tom.drive(tesla);
-    tom.setPrice(tesla, 8000);
-    std::cout << tesla.getName() << " : " << tesla.getPrice() << std::endl;
-
+int Account::rate = 8;
+int main() {
+    Account account1(20000);
+    Account account2(50000);
+    Account::setRate(5);
+    std::cout << "Rate: "<< Account::getRate() << std::endl;
+    std::cout << "Rate: "<< account1.getRate() << " Income: "<< account1.getIncome() << std::endl;
+    std::cout << "Rate: "<< account2.getRate()<< " Income: "<< account2.getIncome() << std::endl;
     return 0;
 }
