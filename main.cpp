@@ -1,25 +1,26 @@
 #include <iostream>
 #include <string>
-
-class Person
+class Counter
 {
 public:
-    Person(std::string n)
+    Counter (int sec)
     {
-        name = n;
+        seconds = sec;
     }
-    ~Person()
+    void display()
     {
-        std::cout<< "Destructor called for Person "<< name << std::endl;
+        std::cout << seconds << " seconds"<< std::endl;
     }
-private:
-    std::string name;
+    int seconds;
 };
-
+Counter operator + (Counter c1, Counter c2)
+{
+    return Counter(c1.seconds + c2.seconds);
+}
 int main() {
- Person tom("Tom");
- Person *sam = new Person("Sam");
- delete sam;
- std::cout << "End of Main" << std::endl;
+    Counter c1(20);
+    Counter c2(10);
+    Counter c3 = c1 + c2;
+    c3.display();
     return 0;
 }
