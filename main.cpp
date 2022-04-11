@@ -1,28 +1,32 @@
 #include <iostream>
 #include <string>
-class Counter
+class IntAccount
 {
+private:
+    int id;
 public:
-    Counter (int sec)
-    {
-        seconds = sec;
+    IntAccount(int id): id(id)
+    { }
+    int getId(){
+        return  id;
     }
-    void display()
-    {
-        std::cout << seconds << " seconds"<< std::endl;
+};
+
+class StrAccount {
+private:
+    std::string id;
+public:
+    StrAccount(std::string id) : id (id)
+    {}
+    std::string getId(){
+        return id;
     }
-    Counter& operator += (Counter c2)
-    {
-        seconds += c2.seconds;
-        return *this;
-    }
-    int seconds;
 };
 
 int main() {
-    Counter c1(20);
-    Counter c2(10);
-    c1 += c2;
-    c1.display();
+    StrAccount acc1("ca-pub1292342340");
+    IntAccount acc2(12343452);
+    std::cout << "acc1: "<< acc1.getId()<< std::endl;
+    std::cout << "acc2: "<< acc2.getId() << std::endl;
     return 0;
 }
